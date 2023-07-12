@@ -5,8 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    adada
+    <div>
+        <form action="javascript:void(0)" id="officeForm">
+        <h1>Office Form</h1>
+        {{officeForm.as_p}}
+        <input type="submit" value="Save Office">
+    </form>
+        <hr><hr>
+        <form action="javascript:void(0)" id="employeeForm">
+        <h1>EmployeeForm</h1>
+        {{employeeForm.as_p}}
+        <input type="submit" value="Save Employee">
+    </form>
+    </div>
+    
 </body>
 </html>
+<script>
+    $(document).ready(()=>{
+        alert("welcome")
+    })
+    onOfficeFormSubmit=()=>{
+        alert("Office Form Submission")
+    }
+    onEmployeeFormSubmission=()=>{
+        alert("Employee Form Submission")
+    }
+    $("#officeForm").submit(
+        onOfficeFormSubmit  
+    )
+    $("#employeeForm").submit(
+        onEmployeeFormSubmission
+    )
+</script>
+
