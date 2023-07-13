@@ -11,11 +11,13 @@
     <div>
         <form action="" id="officeForm">
         <h1>Office Form</h1>
+        {% csrf_token %}
         {{officeForm.as_p}}
         <input type="submit" value="Save Office">
     </form>
         <hr><hr>
         <form action="javascript:void(0)" id="employeeForm">
+            {% csrf_token %}
         <h1>EmployeeForm</h1>
         {{employeeForm.as_p}}
         <input type="submit" value="Save Employee">
@@ -38,7 +40,20 @@
             body[element.name] = element.value
         });
         console.log(body)
-        // alert("Office Form Submission")
+        // alert("Office Form Submission"
+        $.ajax({
+            method:"POST",
+            url: "office/",
+            data:body
+        })
+        .done((response)=>{
+            console.log(response)
+            event.target.reset()
+            alert("Successfully Submitted :)")
+        })
+        .fail((response)=>{
+            console.log(response)
+        })
     }
     onEmployeeFormSubmission=(event)=>{
         {% comment %} alert("Employee Form Submission") {% endcomment %}
@@ -48,7 +63,7 @@
         employeeForm.forEach(element=>{
             body[element.name] = element.value
         })
-        console.log(body)
+        
     }
     $("#officeForm").submit(
         onOfficeFormSubmit  
