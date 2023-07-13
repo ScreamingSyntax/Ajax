@@ -25,3 +25,13 @@ def officeCrud(request):
         office = officeForm.save()
         body = office
         return JsonResponse(model_to_dict(office))
+
+def empCrud(request):
+    employeeForm = EmployeeForm()
+    if request.method == "POST":
+        employee = request.POST
+        employeeForm = EmployeeForm(employee)
+        employee_saved = employeeForm.save()
+        return JsonResponse(
+            model_to_dict(employee_saved)
+        )

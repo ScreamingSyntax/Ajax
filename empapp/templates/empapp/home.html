@@ -63,10 +63,22 @@
         employeeForm.forEach(element=>{
             body[element.name] = element.value
         })
-        
+        $.ajax({
+            method:"POST",
+            url:"emp/",
+            data:body
+        })
+        .done((response)=>{
+            console.log(response)
+            event.target.reset()
+            alert("Employee Form Submitted")
+        })
+        .fail((response)=>{
+            console.log(response)
+        })
     }
     $("#officeForm").submit(
-        onOfficeFormSubmit  
+        onOfficeFormSubmit
     )
     $("#employeeForm").submit(
         onEmployeeFormSubmission
