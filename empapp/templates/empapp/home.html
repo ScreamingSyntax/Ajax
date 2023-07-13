@@ -34,12 +34,27 @@
         {{employeeForm.as_p}}
         <input type="submit" value="Save Employee">
     </form>
+    <div class="">
+        <table>
+            <thead>
+                <tr>
+                    <th>FirstName </th>
+                    <th>LastName </th>
+                    <th>Email </th>
+                    <th>Gender </th>
+                    <th>Office </th>
+                <tr>
+            </thead>
+            <tbody id="employeeTableId">
+            </tbody>
+        </table>
     </div>
     
 </body>
 </html>
 <script>
     var officeList = []
+    var empList = []
     getAllOffices=()=>{
         console.log("getting data from server.. ")
         $.ajax({
@@ -50,15 +65,53 @@
             const offices = JSON.parse(response)
             officeList = offices
             renderOfficeTable()
+            getAllEmployees()
         })
         .fail(response=>{
             console.log(response)
         })
     }
+    getAllEmployees=()=>{
+        console.log("Getting data from employees")
+        $.ajax({
+            method:"GET",
+            url:"emps/"
+        })
+        .done(response=>{
+          let employees = JSON.parse(response)
+          {% comment %} empList = employees {% endcomment %}
+          {% comment %} tempList =  {% endcomment %}
+          employees.forEach(e=>{
+            empList.push(e.fields)
+          })
+          renderEmployeeTable()
+        })
+    }
     $(document).ready(
         getAllOffices
     )
-
+    renderEmployeeTable=()=>{
+        {% comment %} console.log(empList) {% endcomment %}
+        const tableBody = document.getElementById("employeeTableId")
+        empList.forEach(e=>{
+            const row = tableBody.insertRow()
+            const fullName = document.createElement("TD")
+            const lastName = document.createElement("TD")
+            const email = document.createElement("TD")
+            const gender = document.createElement("TD")
+            const office = document.createElement("TD")
+            fullName.innerHTML = e.first_name
+            lastName.innerHTML = e.last_name
+            email.innerHTML = e.email
+            gender.innerHTML = e.gender
+            office.innerHTML = e.office
+            row.appendChild(fullName)
+            row.appendChild(lastName)
+            row.appendChild(email)
+            row.appendChild(gender)
+            row.appendChild(office)
+        })
+    }
     renderOfficeTable=()=>{
         alert("HEllo")
         console.log("In render table",officeList) 

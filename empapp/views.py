@@ -40,3 +40,7 @@ def empCrud(request):
 def getAllOffices(request):
     offices = Office.objects.all()
     return JsonResponse(serializers.serialize("json",offices),safe=False)
+
+def getAllEmployees(request):
+    employees = Employee.objects.all()
+    return JsonResponse(serializers.serialize("json",employees),safe=False)
