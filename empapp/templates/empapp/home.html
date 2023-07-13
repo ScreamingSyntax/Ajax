@@ -56,7 +56,6 @@
         })
     }
     onEmployeeFormSubmission=(event)=>{
-        {% comment %} alert("Employee Form Submission") {% endcomment %}
         event.preventDefault()
         employeeForm = $(event.target).serializeArray()
         body = {}
