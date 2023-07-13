@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>
-        <form action="javascript:void(0)" id="officeForm">
+        <form action="" id="officeForm">
         <h1>Office Form</h1>
         {{officeForm.as_p}}
         <input type="submit" value="Save Office">
@@ -28,11 +28,27 @@
     $(document).ready(()=>{
         alert("welcome")
     })
-    onOfficeFormSubmit=()=>{
-        alert("Office Form Submission")
+    onOfficeFormSubmit=(event)=>{
+        event.preventDefault()
+        officeFormValues = $(event.target).serializeArray()
+        console.log(officeFormValues)
+        body = {}
+        officeFormValues.forEach(element => {
+            // console.log(element)
+            body[element.name] = element.value
+        });
+        console.log(body)
+        // alert("Office Form Submission")
     }
-    onEmployeeFormSubmission=()=>{
-        alert("Employee Form Submission")
+    onEmployeeFormSubmission=(event)=>{
+        {% comment %} alert("Employee Form Submission") {% endcomment %}
+        event.preventDefault()
+        employeeForm = $(event.target).serializeArray()
+        body = {}
+        employeeForm.forEach(element=>{
+            body[element.name] = element.value
+        })
+        console.log(body)
     }
     $("#officeForm").submit(
         onOfficeFormSubmit  
